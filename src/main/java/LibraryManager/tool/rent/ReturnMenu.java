@@ -3,17 +3,12 @@ package LibraryManager.tool.rent;
 import LibraryManager.service.RentService;
 import LibraryManager.tool.Tool;
 
-public class ReturnMenu extends Tool<String> {
+public class ReturnMenu extends Tool {
     @Override
-    protected String showForm() {
+    public void start() {
         RentService.getInstance().allRentalsPrinter().print(textIO.getTextTerminal());
 
-        return textIO.newStringInputReader().withMinLength(0)
+        textIO.newStringInputReader().withMinLength(0)
                 .read("Who is returning a book? (Enter to exit)");
-    }
-
-    @Override
-    protected void handleResult(String result) {
-
     }
 }

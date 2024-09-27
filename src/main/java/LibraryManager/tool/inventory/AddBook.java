@@ -4,9 +4,9 @@ import LibraryManager.model.entity.Book;
 import LibraryManager.service.BookService;
 import LibraryManager.tool.Tool;
 
-public class AddBook extends Tool<Book> {
+public class AddBook extends Tool {
     @Override
-    protected Book showForm() {
+    public void start() {
         String title = textIO.newStringInputReader()
                 .read("What is the title of the book?");
         String author = textIO.newStringInputReader()
@@ -18,16 +18,13 @@ public class AddBook extends Tool<Book> {
         boolean isEBook = textIO.newBooleanInputReader()
                 .read("What is the isbn of the book?");
 
-        return new Book(BookService.getInstance().getNextId(), title, author, publisher, isbn, isEBook);
-    }
+        Book book = new Book(BookService.getInstance().getNextId(), title, author, publisher, isbn, isEBook);
 
-    @Override
-    protected void handleResult(Book result) {
-        boolean success = BookService.getInstance().add(result);
+        boolean success = BookService.getInstance().add(book);
         if (success) {
-            println("Added Book: " + result.getTitle());
+            println("Added Book: " + book.getTitle());
         } else {
-            println("Failed to add Book: " + result.getTitle());
+            println("Failed to add Book: " + book.getTitle());
         }
     }
 }

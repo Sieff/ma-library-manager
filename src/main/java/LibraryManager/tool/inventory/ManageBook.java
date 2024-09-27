@@ -8,7 +8,7 @@ import LibraryManager.tool.Tool;
 
 import java.util.List;
 
-public class ManageBook extends Tool<ManageBookOption> {
+public class ManageBook extends Tool {
     private Book book;
 
     @Override
@@ -18,7 +18,7 @@ public class ManageBook extends Tool<ManageBookOption> {
     }
 
     @Override
-    protected ManageBookOption showForm() {
+    public void start() {
         textIO.getTextTerminal();
 
         TablePrinter tablePrinter = new TablePrinter();
@@ -32,13 +32,10 @@ public class ManageBook extends Tool<ManageBookOption> {
 
         tablePrinter.print(textIO.getTextTerminal());
 
-        return textIO.newEnumInputReader(ManageBookOption.class)
+        ManageBookOption option = textIO.newEnumInputReader(ManageBookOption.class)
                 .read("What do you want to do with the Book?");
-    }
 
-    @Override
-    protected void handleResult(ManageBookOption result) {
-        switch (result) {
+        switch (option) {
             case DELETE -> BookService.getInstance().remove(book);
         }
     }

@@ -2,16 +2,13 @@ package LibraryManager.tool.inventory;
 
 import LibraryManager.tool.Tool;
 
-public class InventoryMenu extends Tool<InventoryMenuOption> {
+public class InventoryMenu extends Tool {
     @Override
-    protected InventoryMenuOption showForm() {
-        return textIO.newEnumInputReader(InventoryMenuOption.class)
+    public void start() {
+        InventoryMenuOption option = textIO.newEnumInputReader(InventoryMenuOption.class)
                 .read("What do you want to do?");
-    }
 
-    @Override
-    protected void handleResult(InventoryMenuOption result) {
-        switch (result) {
+        switch (option) {
             case ADD_BOOK -> {
                 new AddBook().start();
                 start();

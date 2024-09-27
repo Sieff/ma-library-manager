@@ -4,18 +4,12 @@ import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 import org.beryx.textio.TextTerminal;
 
-public abstract class Tool<T> {
+public abstract class Tool {
     protected TextIO textIO = TextIoFactory.getTextIO();
 
-    abstract protected T showForm();
-    abstract protected void handleResult(T result);
+    abstract public void start();
 
-    public void start() {
-        T result = showForm();
-        handleResult(result);
-    }
-
-    public Tool<T> withParameter(Object param) {
+    public Tool withParameter(Object param) {
         return this;
     }
 

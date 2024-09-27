@@ -10,7 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RentBook extends Tool<RentBookRequest> {
+public class RentBook extends Tool {
     private Book book;
 
     @Override
@@ -20,7 +20,7 @@ public class RentBook extends Tool<RentBookRequest> {
     }
 
     @Override
-    protected RentBookRequest showForm() {
+    public void start() {
         BookService.getInstance().bookPrinter(book).print(textIO.getTextTerminal());
 
         String borrower = textIO.newStringInputReader().read("Who wants to rent the book?");
@@ -40,17 +40,14 @@ public class RentBook extends Tool<RentBookRequest> {
             }
         }
 
-        return new RentBookRequest(book, borrower, asEBook, expirationDate);
-    }
+        RentBookRequest request = new RentBookRequest(book, borrower, asEBook, expirationDate);
 
-    @Override
-    protected void handleResult(RentBookRequest result) {
-        boolean success = RentService.getInstance().rentBook(result);
+        boolean success = RentService.getInstance().rentBook(request);
         if (success) {
-            printf("The book is rented for %s until %s\n", result.getBorrower(), result.getExpiration().toString());
+            printf("The book is rented for %s until %s\n", request.getBorrower(), request.getExpiration().toString());
         } else {
             println("The book is not available.");
-            new RentBook().withParameter(result.getBook()).start();
+            new RentBook().withParameter(request.getBook()).start();
         }
     }
 }
