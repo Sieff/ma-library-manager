@@ -6,10 +6,8 @@ import LibraryManager.service.BookService;
 import LibraryManager.tool.TablePrinter;
 import LibraryManager.tool.Tool;
 
-import java.util.List;
-
 public class ManageBook extends Tool {
-    private Book book;
+    private final Book book;
 
     public ManageBook(Book book) {
         this.book = book;
@@ -19,14 +17,7 @@ public class ManageBook extends Tool {
     public void start() {
         textIO.getTextTerminal();
 
-        TablePrinter tablePrinter = new TablePrinter();
-        tablePrinter.setHeaders(List.of("ID", "Title", "Author", "Publisher", "ISBN", "E-Book"));
-        tablePrinter.addColumn(List.of(book.getId().toString()));
-        tablePrinter.addColumn(List.of(book.getTitle()));
-        tablePrinter.addColumn(List.of(book.getAuthor()));
-        tablePrinter.addColumn(List.of(book.getPublisher()));
-        tablePrinter.addColumn(List.of(book.getIsbn()));
-        tablePrinter.addColumn(List.of(book.isEBook().toString()));
+        TablePrinter tablePrinter = BookService.getInstance().bookPrinter(book);
 
         tablePrinter.print(textIO.getTextTerminal());
 

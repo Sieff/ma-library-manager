@@ -1,17 +1,18 @@
-package LibraryManager.tool.rent;
+package LibraryManager.tool.rental;
 
 
 import LibraryManager.model.entity.Book;
 import LibraryManager.service.BookService;
-import LibraryManager.service.RentService;
+import LibraryManager.service.RentalService;
 import LibraryManager.tool.Tool;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 
 public class RentBook extends Tool {
     private final Book book;
+    private final RentalService rentalService = RentalService.getInstance();
 
     public RentBook(Book book) {
         this.book = book;
@@ -26,26 +27,29 @@ public class RentBook extends Tool {
         boolean asEBook = textIO.newBooleanInputReader()
                 .read("Do you want to rent the book as an E-Book?");
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        dateFormat.setLenient(false);
-        Date expirationDate = null;
-        while (expirationDate == null) {
+        Date dueDate = null;
+        boolean validDate = false;
+        while (!validDate) {
             String dateInput = textIO.newStringInputReader().read("Enter an expiration date (dd.MM.yyyy):");
             try {
-                expirationDate = dateFormat.parse(dateInput);
+                dueDate = rentalService.getDateFormat().parse(dateInput);
+                if (dueDate.before(Date.from(Instant.now()))) {
+                    println("Invalid date. Please choose a future date.");
+                } else {
+                    validDate = true;
+                }
             } catch (ParseException e) {
                 println("Invalid date format. Please try again.");
             }
         }
 
-        RentBookRequest request = new RentBookRequest(book, borrower, asEBook, expirationDate);
+        BookRentalRequest request = new BookRentalRequest(book, borrower, asEBook, dueDate);
 
-        boolean success = RentService.getInstance().rentBook(request);
+        boolean success = RentalService.getInstance().rentBook(request);
         if (success) {
-            printf("The book is rented for %s until %s\n", request.getBorrower(), request.getExpiration().toString());
+            printf("The book is rented for %s until %s\n", request.getBorrower(), rentalService.getDateFormat().format(request.getDueDate()));
         } else {
             println("The book is not available.");
-            new RentBook(request.getBook()).start();
         }
     }
 }

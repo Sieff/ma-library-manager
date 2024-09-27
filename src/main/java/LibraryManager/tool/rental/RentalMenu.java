@@ -1,9 +1,9 @@
-package LibraryManager.tool.rent;
+package LibraryManager.tool.rental;
 
 import LibraryManager.service.BookService;
 import LibraryManager.tool.Tool;
 
-public class RentMenu extends Tool {
+public class RentalMenu extends Tool {
     @Override
     public void start() {
         BookService.getInstance().allBooksPrinter().print(textIO.getTextTerminal());

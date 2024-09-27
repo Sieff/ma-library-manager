@@ -2,8 +2,8 @@ package LibraryManager.tool.mainMenu;
 
 import LibraryManager.tool.Tool;
 import LibraryManager.tool.inventory.InventoryMenu;
-import LibraryManager.tool.rent.RentMenu;
-import LibraryManager.tool.rent.ReturnMenu;
+import LibraryManager.tool.rental.RentalMenu;
+import LibraryManager.tool.rental.ReturnMenu;
 
 public class MainMenu extends Tool {
     @Override
@@ -13,7 +13,7 @@ public class MainMenu extends Tool {
 
         switch (option) {
             case INVENTORY -> new InventoryMenu().start();
-            case RENT -> new RentMenu().start();
+            case RENT -> new RentalMenu().start();
             case RETURN -> new ReturnMenu().start();
         }
     }
