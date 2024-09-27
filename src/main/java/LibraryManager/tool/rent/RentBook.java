@@ -11,12 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class RentBook extends Tool {
-    private Book book;
+    private final Book book;
 
-    @Override
-    public RentBook withParameter(Object book) {
-        this.book = (Book) book;
-        return this;
+    public RentBook(Book book) {
+        this.book = book;
     }
 
     @Override
@@ -47,7 +45,7 @@ public class RentBook extends Tool {
             printf("The book is rented for %s until %s\n", request.getBorrower(), request.getExpiration().toString());
         } else {
             println("The book is not available.");
-            new RentBook().withParameter(request.getBook()).start();
+            new RentBook(request.getBook()).start();
         }
     }
 }

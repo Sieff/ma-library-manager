@@ -17,7 +17,7 @@ public class ManageBooks extends Tool {
             int id = Integer.parseInt(bookId);
 
             if (BookService.getInstance().get(id) != null) {
-                new ManageBook().withParameter(BookService.getInstance().get(id)).start();
+                new ManageBook(BookService.getInstance().get(id)).start();
             } else {
                 printf("The Book with ID %d does not exist\n", id);
                 start();

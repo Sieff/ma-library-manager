@@ -11,10 +11,8 @@ import java.util.List;
 public class ManageBook extends Tool {
     private Book book;
 
-    @Override
-    public ManageBook withParameter(Object book) {
-        this.book = (Book) book;
-        return this;
+    public ManageBook(Book book) {
+        this.book = book;
     }
 
     @Override
