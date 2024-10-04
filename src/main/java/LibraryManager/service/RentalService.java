@@ -2,7 +2,8 @@ package LibraryManager.service;
 
 import LibraryManager.model.entity.Book;
 import LibraryManager.model.entity.BookRental;
-import LibraryManager.tool.TablePrinter;
+import LibraryManager.util.ColumnTablePrinter;
+import LibraryManager.util.TablePrinter;
 import LibraryManager.model.entity.BookRentalRequest;
 
 import java.util.*;
@@ -50,12 +51,12 @@ public class RentalService {
     public TablePrinter allRentalsPrinter() {
         List<BookRental> allRentals = bookRentals.values().stream().toList();
 
-        TablePrinter tablePrinter = new TablePrinter();
+        TablePrinter tablePrinter = new ColumnTablePrinter();
         tablePrinter.setHeaders(List.of("Rental-ID", "Borrower", "Book-ID", "Title"));
-        tablePrinter.addColumn(allRentals.stream().map(rental -> rental.getId().toString()).toList());
-        tablePrinter.addColumn(allRentals.stream().map(BookRental::getBorrower).toList());
-        tablePrinter.addColumn(allRentals.stream().map(rental -> rental.getBook().getId().toString()).toList());
-        tablePrinter.addColumn(allRentals.stream().map(rental -> rental.getBook().getTitle()).toList());
+        tablePrinter.addDataPoint(allRentals.stream().map(rental -> rental.getId().toString()).toList());
+        tablePrinter.addDataPoint(allRentals.stream().map(BookRental::getBorrower).toList());
+        tablePrinter.addDataPoint(allRentals.stream().map(rental -> rental.getBook().getId().toString()).toList());
+        tablePrinter.addDataPoint(allRentals.stream().map(rental -> rental.getBook().getTitle()).toList());
 
         return tablePrinter;
     }

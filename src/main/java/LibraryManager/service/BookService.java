@@ -1,7 +1,8 @@
 package LibraryManager.service;
 
 import LibraryManager.model.entity.Book;
-import LibraryManager.tool.TablePrinter;
+import LibraryManager.util.ColumnTablePrinter;
+import LibraryManager.util.TablePrinter;
 
 import java.util.HashMap;
 import java.util.List;
@@ -45,21 +46,21 @@ public class BookService {
     }
 
     public TablePrinter allBooksPrinter() {
-        TablePrinter tablePrinter = new TablePrinter();
+        TablePrinter tablePrinter = new ColumnTablePrinter();
         tablePrinter.setHeaders(List.of("ID", "Title", "Author"));
-        tablePrinter.addColumn(getAll().stream().map(book -> book.getId().toString()).toList());
-        tablePrinter.addColumn(getAll().stream().map(Book::getTitle).toList());
-        tablePrinter.addColumn(getAll().stream().map(Book::getAuthor).toList());
+        tablePrinter.addDataPoint(getAll().stream().map(book -> book.getId().toString()).toList());
+        tablePrinter.addDataPoint(getAll().stream().map(Book::getTitle).toList());
+        tablePrinter.addDataPoint(getAll().stream().map(Book::getAuthor).toList());
 
         return tablePrinter;
     }
 
     public TablePrinter bookPrinter(Book book) {
-        TablePrinter tablePrinter = new TablePrinter();
+        TablePrinter tablePrinter = new ColumnTablePrinter();
         tablePrinter.setHeaders(List.of("ID", "Title", "Author"));
-        tablePrinter.addColumn(List.of(book.getId().toString()));
-        tablePrinter.addColumn(List.of(book.getTitle()));
-        tablePrinter.addColumn(List.of(book.getAuthor()));
+        tablePrinter.addDataPoint(List.of(book.getId().toString()));
+        tablePrinter.addDataPoint(List.of(book.getTitle()));
+        tablePrinter.addDataPoint(List.of(book.getAuthor()));
 
         return tablePrinter;
     }

@@ -3,7 +3,7 @@ package LibraryManager.tool.inventory;
 
 import LibraryManager.model.entity.Book;
 import LibraryManager.service.BookService;
-import LibraryManager.tool.TablePrinter;
+import LibraryManager.util.TablePrinter;
 import LibraryManager.tool.Tool;
 
 public class ManageBook extends Tool {

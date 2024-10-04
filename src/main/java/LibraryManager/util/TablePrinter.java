@@ -1,16 +1,19 @@
-package LibraryManager.tool;
+package LibraryManager.util;
 
 import org.beryx.textio.TextTerminal;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TablePrinter {
-    private final List<List<String>> table = new ArrayList<>();
-    private List<String> headers = new ArrayList<>();
-    private int maxColumnWidth = 40;
+public abstract class TablePrinter {
+    protected final List<List<String>> table = new ArrayList<>();
+    protected List<String> headers = new ArrayList<>();
+    protected int maxColumnWidth = 40;
 
-    public void addColumn(List<String> values) {
+    protected abstract List<Integer> getColumnWidths();
+    protected abstract List<String> getDataLines(List<Integer> columnWidths);
+
+    public void addDataPoint(List<String> values) {
         table.add(values);
     }
 
@@ -67,24 +70,6 @@ public class TablePrinter {
         return headerLine.toString();
     }
 
-    private List<String> getDataLines(List<Integer> columnWidths) {
-        List<StringBuilder> lines = new ArrayList<>();
-        for (int i = 0; i < table.getFirst().size(); i++) {
-            lines.add(new StringBuilder());
-        }
-        for (int column = 0; column < table.size(); column++) {
-            for (int line = 0; line < table.get(column).size(); line++) {
-                renderEntry(lines.get(line), table.get(column).get(line), columnWidths.get(column), column == 0, column == table.size() - 1);
-            }
-        }
-
-        for (StringBuilder line : lines) {
-            line.append("\n");
-        }
-
-        return lines.stream().map(StringBuilder::toString).toList();
-    }
-
     private String getDividerLine(List<Integer> columnWidths) {
         StringBuilder dividerLine = new StringBuilder();
         for (Integer columnWidth : columnWidths) {
@@ -95,7 +80,7 @@ public class TablePrinter {
         return dividerLine.toString();
     }
 
-    private void renderEntry(StringBuilder target, String entry, int columnWidth, boolean isFirst, boolean isLast) {
+    protected void renderEntry(StringBuilder target, String entry, int columnWidth, boolean isFirst, boolean isLast) {
         if (isFirst) {
             target.append("| ");
         } else {
@@ -116,25 +101,19 @@ public class TablePrinter {
         }
     }
 
-    private List<Integer> getColumnWidths() {
-        List<Integer> headerWidths = headers.stream().map(String::length).toList();
-        List<Integer> columnWidths = table.stream().map(
-                column -> column.stream().map(String::length).max(Integer::compareTo).orElse(0)
-        ).toList();
-
+    protected List<Integer> getRenderedColumnWidths(List<Integer> headerWidths, List<Integer> columnWidths) {
         List<Integer> widths = new ArrayList<>();
         for (int i = 0; i < headerWidths.size(); i++) {
-            if (headerWidths.get(i) < maxColumnWidth && headerWidths.get(i) > columnWidths.get(i)) {
+            if (headerWidths.get(i) < maxColumnWidth && headerWidths.get(i) >= columnWidths.get(i)) {
                 widths.add(headerWidths.get(i));
                 continue;
             }
-            if (columnWidths.get(i) < maxColumnWidth && columnWidths.get(i) > headerWidths.get(i)) {
+            if (columnWidths.get(i) < maxColumnWidth && columnWidths.get(i) >= headerWidths.get(i)) {
                 widths.add(columnWidths.get(i));
                 continue;
             }
             widths.add(maxColumnWidth);
         }
-
         return widths;
     }
 }

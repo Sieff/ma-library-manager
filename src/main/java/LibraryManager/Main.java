@@ -26,6 +26,7 @@ public class Main {
         bookService.add(new Book(8, "The Great Gatsby", "F. Scott Fitzgerald", "Fiction", 1925));
         bookService.add(new Book(9, "Moby-Dick", "Herman Melville", "Adventure", 1851));
         bookService.add(new Book(10, "Brave New World", "Aldous Huxley", "Science Fiction", 1932));
+        /*
         bookService.add(new Book(11, "The Catcher in the Rye", "J. D. Salinger", "Fiction", 1951));
         bookService.add(new Book(12, "The Lord of the Rings", "J. R. R. Tolkien", "Fantasy", 1954));
         bookService.add(new Book(13, "The Chronicles of Narnia", "C. S. Lewis", "Fantasy", 1950));
@@ -37,6 +38,8 @@ public class Main {
         bookService.add(new Book(19, "Dracula", "Bram Stoker", "Horror", 1897));
         bookService.add(new Book(20, "Frankenstein", "Mary Shelley", "Horror", 1818));
         bookService.add(new Book(21, "Les Misérables", "Victor Hugo", "Historical Fiction", 1862));
+
+         */
 
     }
 }
