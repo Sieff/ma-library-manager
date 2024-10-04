@@ -4,17 +4,16 @@ public class Book {
     private final Integer id;
     private final String title;
     private final String author;
-    private final String publisher;
-    private final String isbn;
-    private final boolean isEBook;
+    private final String genre;
+    private final int publicationYear;
 
-    public Book(Integer id, String title, String author, String publisher, String isbn, boolean isEBook) {
+
+    public Book(Integer id, String title, String author, String genre, int publicationYear) {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.publisher = publisher;
-        this.isbn = isbn;
-        this.isEBook = isEBook;
+        this.genre = genre;
+        this.publicationYear = publicationYear;
     }
 
     public Integer getId() {
@@ -29,15 +28,11 @@ public class Book {
         return author;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public String getGenre() {
+        return genre;
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public Boolean isEBook() {
-        return isEBook;
+    public int getPublicationYear() {
+        return publicationYear;
     }
 }

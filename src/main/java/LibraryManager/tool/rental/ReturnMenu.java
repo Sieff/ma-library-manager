@@ -10,7 +10,7 @@ public class ReturnMenu extends Tool {
         RentalService.getInstance().allRentalsPrinter().print(textIO.getTextTerminal());
 
         String inputId = textIO.newStringInputReader().withMinLength(0)
-                .read("Enter rental ID to return the book (Enter to exit)");
+                .read("Enter Rental-ID to return a book (Enter to exit)");
 
         if (!inputId.isEmpty()) {
             try {

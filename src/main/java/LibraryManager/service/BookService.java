@@ -46,26 +46,20 @@ public class BookService {
 
     public TablePrinter allBooksPrinter() {
         TablePrinter tablePrinter = new TablePrinter();
-        tablePrinter.setHeaders(List.of("ID", "Title", "ISBN", "Author", "Publisher", "E-Book"));
+        tablePrinter.setHeaders(List.of("ID", "Title", "Author"));
         tablePrinter.addColumn(getAll().stream().map(book -> book.getId().toString()).toList());
         tablePrinter.addColumn(getAll().stream().map(Book::getTitle).toList());
-        tablePrinter.addColumn(getAll().stream().map(Book::getIsbn).toList());
         tablePrinter.addColumn(getAll().stream().map(Book::getAuthor).toList());
-        tablePrinter.addColumn(getAll().stream().map(Book::getPublisher).toList());
-        tablePrinter.addColumn(getAll().stream().map(book -> book.isEBook().toString()).toList());
 
         return tablePrinter;
     }
 
     public TablePrinter bookPrinter(Book book) {
         TablePrinter tablePrinter = new TablePrinter();
-        tablePrinter.setHeaders(List.of("ID", "Title", "ISBN", "Author", "Publisher", "E-Book"));
+        tablePrinter.setHeaders(List.of("ID", "Title", "Author"));
         tablePrinter.addColumn(List.of(book.getId().toString()));
         tablePrinter.addColumn(List.of(book.getTitle()));
-        tablePrinter.addColumn(List.of(book.getIsbn()));
         tablePrinter.addColumn(List.of(book.getAuthor()));
-        tablePrinter.addColumn(List.of(book.getPublisher()));
-        tablePrinter.addColumn(List.of(book.isEBook().toString()));
 
         return tablePrinter;
     }
