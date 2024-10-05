@@ -25,18 +25,18 @@ The BookService and RentalService are both singletons, as they manage the state 
 
 ### Util
 
-#### Table printer
+#### Table String Builder
 
-The table printer class is used to create Strings to be printed of tables.
+The table string builder classes are used to create Strings to be printed of tables.
 
-To create a table, either create a new instance of RowTablePrinter or ColumnTablePrinter.
+To create a printable table, either create a new instance of RowTableStringBuilder or RowTableStringBuilder.
 
-When you use the RowTablePrinter, you can add rows as a list of strings by calling the addDataPoint method.
-When you use the ColumnTablePrinter, you can add columns as a list of strings by calling the addDataPoint method.
+When you use the RowTableStringBuilder, you can add rows as a list of strings by calling the addDataPoint method.
+When you use the RowTableStringBuilder, you can add columns as a list of strings by calling the addDataPoint method.
 
 To set table headers, call the setTableHeaders method.
 
-Note that before printing the table, the amount of headers, if not empty, should equal the amount of columns and the amount of columns should be equal between rows.
+Note that before printing the table, the amount of headers should equal the amount of columns and the amount of rows/columns should be consistent between entries.
 
 ## Your task
 
