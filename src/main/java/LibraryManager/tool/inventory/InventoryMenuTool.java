@@ -2,7 +2,7 @@ package LibraryManager.tool.inventory;
 
 import LibraryManager.tool.Tool;
 
-public class InventoryMenu extends Tool {
+public class InventoryMenuTool extends Tool {
     @Override
     public void start() {
         InventoryMenuOption option = textIO.newEnumInputReader(InventoryMenuOption.class)
@@ -10,11 +10,11 @@ public class InventoryMenu extends Tool {
 
         switch (option) {
             case ADD_BOOK -> {
-                new AddBook().start();
+                new AddBookTool().start();
                 start();
             }
             case MANAGE_BOOKS -> {
-                new ManageBooks().start();
+                new ManageBooksTool().start();
                 start();
             }
         }

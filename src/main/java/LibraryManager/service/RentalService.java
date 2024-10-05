@@ -1,10 +1,10 @@
 package LibraryManager.service;
 
-import LibraryManager.model.entity.Book;
-import LibraryManager.model.entity.BookRental;
-import LibraryManager.util.ColumnTablePrinter;
-import LibraryManager.util.TablePrinter;
-import LibraryManager.model.entity.BookRentalRequest;
+import LibraryManager.model.Book;
+import LibraryManager.model.BookRental;
+import LibraryManager.util.RowTablePrinter;
+import LibraryManager.util.TableStringBuilder;
+import LibraryManager.model.BookRentalRequest;
 
 import java.util.*;
 
@@ -30,6 +30,10 @@ public class RentalService {
         return false;
     }
 
+    public List<BookRental> getAll() {
+        return bookRentals.values().stream().toList();
+    }
+
     public BookRental returnBook(Integer id) {
         return bookRentals.remove(id);
     }
@@ -38,7 +42,7 @@ public class RentalService {
         return bookRentals.values().stream().map(BookRental::getId).max(Integer::compareTo).orElse(0) + 1;
     }
 
-    private boolean isAvailable(Book book) {
+    public boolean isAvailable(Book book) {
         for (BookRental rental : bookRentals.values()) {
             if (rental.getBook() == book) {
                 return false;
@@ -48,16 +52,28 @@ public class RentalService {
         return true;
     }
 
-    public TablePrinter allRentalsPrinter() {
+    private List<String> getRentalHeaders() {
+        return List.of("Rental-ID", "Borrower", "Book-ID", "Title");
+    }
+
+    private List<String> getRentalData(BookRental rental) {
+        return List.of(
+                rental.getId().toString(),
+                rental.getBorrower(),
+                rental.getBook().getId().toString(),
+                rental.getBook().getTitle()
+        );
+    }
+
+    public String allRentalsString() {
         List<BookRental> allRentals = bookRentals.values().stream().toList();
 
-        TablePrinter tablePrinter = new ColumnTablePrinter();
-        tablePrinter.setHeaders(List.of("Rental-ID", "Borrower", "Book-ID", "Title"));
-        tablePrinter.addDataPoint(allRentals.stream().map(rental -> rental.getId().toString()).toList());
-        tablePrinter.addDataPoint(allRentals.stream().map(BookRental::getBorrower).toList());
-        tablePrinter.addDataPoint(allRentals.stream().map(rental -> rental.getBook().getId().toString()).toList());
-        tablePrinter.addDataPoint(allRentals.stream().map(rental -> rental.getBook().getTitle()).toList());
+        TableStringBuilder tablePrinter = new RowTablePrinter();
+        tablePrinter.setHeaders(getRentalHeaders());
+        for (BookRental bookRental : allRentals) {
+            tablePrinter.addDataPoint(getRentalData(bookRental));
+        }
 
-        return tablePrinter;
+        return tablePrinter.toString();
     }
 }

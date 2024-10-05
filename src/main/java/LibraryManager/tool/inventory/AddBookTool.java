@@ -1,10 +1,10 @@
 package LibraryManager.tool.inventory;
 
-import LibraryManager.model.entity.Book;
+import LibraryManager.model.Book;
 import LibraryManager.service.BookService;
 import LibraryManager.tool.Tool;
 
-public class AddBook extends Tool {
+public class AddBookTool extends Tool {
     private final BookService bookService = BookService.getInstance();
 
     @Override

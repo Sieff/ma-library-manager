@@ -1,13 +1,19 @@
 package LibraryManager.tool.rental;
 
-import LibraryManager.model.entity.BookRental;
+import LibraryManager.model.BookRental;
 import LibraryManager.service.RentalService;
 import LibraryManager.tool.Tool;
 
-public class ReturnMenu extends Tool {
+public class ReturnBookTool extends Tool {
+    private final RentalService rentalService = RentalService.getInstance();
     @Override
     public void start() {
-        RentalService.getInstance().allRentalsPrinter().print(textIO.getTextTerminal());
+        if (rentalService.getAll().isEmpty()) {
+            println("No books are currently rented.");
+            return;
+        }
+
+        print(rentalService.allRentalsString());
 
         String inputId = textIO.newStringInputReader().withMinLength(0)
                 .read("Enter Rental-ID to return a book (Enter to exit)");

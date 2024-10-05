@@ -3,7 +3,7 @@ package LibraryManager.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ColumnTablePrinter extends TablePrinter {
+public class ColumnTablePrinter extends TableStringBuilder {
     @Override
     protected List<String> getDataLines(List<Integer> columnWidths)  {
         List<StringBuilder> lines = new ArrayList<>();
@@ -24,12 +24,32 @@ public class ColumnTablePrinter extends TablePrinter {
     }
 
     @Override
+    protected void validateTable() {
+        if (table.isEmpty()) {
+            throw new RuntimeException("No columns provided");
+        }
+        if (headers.isEmpty() || headers.size() != table.size()) {
+            throw new RuntimeException("Number of headers does not match number of columns");
+        }
+        int rows = table.getFirst().size();
+        for (List<String> column : table) {
+            if (column.size() != rows) {
+                throw new RuntimeException("Number of rows does not match between columns");
+            }
+        }
+    }
+
+    @Override
     protected List<Integer> getColumnWidths() {
-        List<Integer> headerWidths = headers.stream().map(String::length).toList();
         List<Integer> columnWidths = table.stream().map(
                 column -> column.stream().map(String::length).max(Integer::compareTo).orElse(0)
         ).toList();
 
-        return getRenderedColumnWidths(headerWidths, columnWidths);
+        if (headers.isEmpty()) {
+            return getRenderedColumnWidths(columnWidths);
+        } else {
+            List<Integer> headerWidths = headers.stream().map(String::length).toList();
+            return getRenderedColumnWidths(headerWidths, columnWidths);
+        }
     }
 }

@@ -3,7 +3,7 @@ package LibraryManager.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RowTablePrinter extends TablePrinter {
+public class RowTablePrinter extends TableStringBuilder {
     @Override
     protected List<String> getDataLines(List<Integer> columnWidths)  {
         List<StringBuilder> lines = new ArrayList<>();
@@ -24,9 +24,23 @@ public class RowTablePrinter extends TablePrinter {
     }
 
     @Override
-    protected List<Integer> getColumnWidths() {
-        List<Integer> headerWidths = headers.stream().map(String::length).toList();
+    protected void validateTable() {
+        if (table.isEmpty()) {
+            throw new RuntimeException("No rows provided");
+        }
+        if (headers.isEmpty() || headers.size() != table.getFirst().size()) {
+            throw new RuntimeException("Number of headers does not match number of columns");
+        }
+        int columns = table.getFirst().size();
+        for (List<String> row : table) {
+            if (row.size() != columns) {
+                throw new RuntimeException("Number of columns does not match between rows");
+            }
+        }
+    }
 
+    @Override
+    protected List<Integer> getColumnWidths() {
         List<Integer> columnWidths = new ArrayList<>(table.getFirst().size());
         for (int i = 0; i < table.getFirst().size(); i++) {
             columnWidths.add(0);
@@ -36,11 +50,16 @@ public class RowTablePrinter extends TablePrinter {
                 Integer entryLength = table.get(line).get(column).length();
 
                 if (entryLength > columnWidths.get(column)) {
-                    columnWidths.set(line, entryLength);
+                    columnWidths.set(column, entryLength);
                 }
             }
         }
 
-        return getRenderedColumnWidths(headerWidths, columnWidths);
+        if (headers.isEmpty()) {
+            return getRenderedColumnWidths(columnWidths);
+        } else {
+            List<Integer> headerWidths = headers.stream().map(String::length).toList();
+            return getRenderedColumnWidths(headerWidths, columnWidths);
+        }
     }
 }

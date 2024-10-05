@@ -9,10 +9,6 @@ public abstract class Tool {
 
     abstract public void start();
 
-    public Tool withParameter(Object param) {
-        return this;
-    }
-
     protected void println(String text) {
         TextTerminal<?> terminal = textIO.getTextTerminal();
         terminal.println(text);

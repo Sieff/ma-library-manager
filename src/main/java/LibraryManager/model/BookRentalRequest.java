@@ -1,4 +1,4 @@
-package LibraryManager.model.entity;
+package LibraryManager.model;
 
 public class BookRentalRequest {
     private final Book book;

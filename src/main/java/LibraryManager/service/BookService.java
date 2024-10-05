@@ -1,8 +1,8 @@
 package LibraryManager.service;
 
-import LibraryManager.model.entity.Book;
-import LibraryManager.util.ColumnTablePrinter;
-import LibraryManager.util.TablePrinter;
+import LibraryManager.model.Book;
+import LibraryManager.util.RowTablePrinter;
+import LibraryManager.util.TableStringBuilder;
 
 import java.util.HashMap;
 import java.util.List;
@@ -45,23 +45,34 @@ public class BookService {
         books.remove(book.getId());
     }
 
-    public TablePrinter allBooksPrinter() {
-        TablePrinter tablePrinter = new ColumnTablePrinter();
-        tablePrinter.setHeaders(List.of("ID", "Title", "Author"));
-        tablePrinter.addDataPoint(getAll().stream().map(book -> book.getId().toString()).toList());
-        tablePrinter.addDataPoint(getAll().stream().map(Book::getTitle).toList());
-        tablePrinter.addDataPoint(getAll().stream().map(Book::getAuthor).toList());
-
-        return tablePrinter;
+    private List<String> getBookHeaders() {
+        return List.of("ID", "Title", "Author", "Genre", "Publication Year");
     }
 
-    public TablePrinter bookPrinter(Book book) {
-        TablePrinter tablePrinter = new ColumnTablePrinter();
-        tablePrinter.setHeaders(List.of("ID", "Title", "Author"));
-        tablePrinter.addDataPoint(List.of(book.getId().toString()));
-        tablePrinter.addDataPoint(List.of(book.getTitle()));
-        tablePrinter.addDataPoint(List.of(book.getAuthor()));
+    private List<String> getBookData(Book book) {
+        return List.of(
+                book.getId().toString(),
+                book.getTitle(),
+                book.getAuthor(),
+                book.getGenre(),
+                book.getPublicationYear().toString()
+        );
+    }
 
-        return tablePrinter;
+    public String allBooksAsString() {
+        TableStringBuilder tablePrinter = new RowTablePrinter();
+        tablePrinter.setHeaders(getBookHeaders());
+        for (Book book : getAll()) {
+            tablePrinter.addDataPoint(getBookData(book));
+        }
+        return tablePrinter.toString();
+    }
+
+    public String bookAsString(Book book) {
+        TableStringBuilder tablePrinter = new RowTablePrinter();
+        tablePrinter.setHeaders(getBookHeaders());
+        tablePrinter.addDataPoint(getBookData(book));
+
+        return tablePrinter.toString();
     }
 }

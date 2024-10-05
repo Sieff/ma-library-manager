@@ -1,17 +1,16 @@
 package LibraryManager.util;
 
-import org.beryx.textio.TextTerminal;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TablePrinter {
+public abstract class TableStringBuilder {
     protected final List<List<String>> table = new ArrayList<>();
     protected List<String> headers = new ArrayList<>();
     protected int maxColumnWidth = 40;
 
     protected abstract List<Integer> getColumnWidths();
     protected abstract List<String> getDataLines(List<Integer> columnWidths);
+    protected abstract void validateTable();
 
     public void addDataPoint(List<String> values) {
         table.add(values);
@@ -25,19 +24,9 @@ public abstract class TablePrinter {
         this.maxColumnWidth = maxColumnWidth;
     }
 
-    public void print(TextTerminal<?> terminal) {
-        if (table.isEmpty()) {
-            throw new RuntimeException("No columns provided");
-        }
-        if (!headers.isEmpty() && headers.size() != table.size()) {
-            throw new RuntimeException("Number of headers does not match number of columns");
-        }
-        int rows = table.getFirst().size();
-        for (List<String> column : table) {
-            if (column.size() != rows) {
-                throw new RuntimeException("Number of rows does not match between columns");
-            }
-        }
+    @Override
+    public String toString() {
+        validateTable();
 
         List<Integer> columnWidths = getColumnWidths();
 
@@ -58,7 +47,7 @@ public abstract class TablePrinter {
 
         result.append(dividerLine);
 
-        terminal.println(result.toString());
+        return result.toString();
     }
 
     private String getHeaderLine(List<Integer> columnWidths) {
@@ -103,7 +92,7 @@ public abstract class TablePrinter {
 
     protected List<Integer> getRenderedColumnWidths(List<Integer> headerWidths, List<Integer> columnWidths) {
         List<Integer> widths = new ArrayList<>();
-        for (int i = 0; i < headerWidths.size(); i++) {
+        for (int i = 0; i < columnWidths.size(); i++) {
             if (headerWidths.get(i) < maxColumnWidth && headerWidths.get(i) >= columnWidths.get(i)) {
                 widths.add(headerWidths.get(i));
                 continue;
@@ -113,6 +102,18 @@ public abstract class TablePrinter {
                 continue;
             }
             widths.add(maxColumnWidth);
+        }
+        return widths;
+    }
+
+    protected List<Integer> getRenderedColumnWidths(List<Integer> columnWidths) {
+        List<Integer> widths = new ArrayList<>();
+        for (Integer columnWidth : columnWidths) {
+            if (columnWidth < maxColumnWidth) {
+                widths.add(columnWidth);
+            } else {
+                widths.add(maxColumnWidth);
+            }
         }
         return widths;
     }

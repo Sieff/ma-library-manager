@@ -1,25 +1,21 @@
 package LibraryManager.tool.inventory;
 
 
-import LibraryManager.model.entity.Book;
+import LibraryManager.model.Book;
 import LibraryManager.service.BookService;
-import LibraryManager.util.TablePrinter;
 import LibraryManager.tool.Tool;
 
-public class ManageBook extends Tool {
+public class ManageBookTool extends Tool {
     private final Book book;
+    private final BookService bookService = BookService.getInstance();
 
-    public ManageBook(Book book) {
+    public ManageBookTool(Book book) {
         this.book = book;
     }
 
     @Override
     public void start() {
-        textIO.getTextTerminal();
-
-        TablePrinter tablePrinter = BookService.getInstance().bookPrinter(book);
-
-        tablePrinter.print(textIO.getTextTerminal());
+        print(bookService.bookAsString(book));
 
         ManageBookOption option = textIO.newEnumInputReader(ManageBookOption.class)
                 .read("What do you want to do with the Book?");
