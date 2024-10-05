@@ -23,8 +23,7 @@ public class BookRentalTool extends Tool {
 
         print(bookService.bookAsString(book));
 
-        String borrower = textIO.newStringInputReader()
-                .read("Who wants to rent the book?");
+        String borrower = stringInput("Who wants to rent the book?", false);
 
         BookRentalRequest request = new BookRentalRequest(book, borrower);
 
@@ -40,8 +39,11 @@ public class BookRentalTool extends Tool {
     private Book bookInput() {
         print(bookService.allBooksAsString());
 
-        String bookId = textIO.newStringInputReader().withMinLength(0)
-                .read("Which Book do you want to rent? (Enter to exit)");
+        String bookId = stringInput("Which Book do you want to rent? (Enter to exit)", true);
+
+        if (bookId.isEmpty()) {
+            return null;
+        }
 
         try {
             int id = Integer.parseInt(bookId);
@@ -50,12 +52,12 @@ public class BookRentalTool extends Tool {
                 return bookService.get(id);
             } else {
                 printf("The Book with ID %d does not exist\n", id);
-                start();
-                return null;
+                return bookInput();
             }
 
         } catch (NumberFormatException e) {
-            return null;
+            print("Not a valid ID, please enter a number\n");
+            return bookInput();
         }
     }
 }

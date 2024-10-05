@@ -17,11 +17,10 @@ public class ManageBookTool extends Tool {
     public void start() {
         print(bookService.bookAsString(book));
 
-        ManageBookOption option = textIO.newEnumInputReader(ManageBookOption.class)
-                .read("What do you want to do with the Book?");
+        ManageBookOption option = enumInput(ManageBookOption.class, "What do you want to do with the Book?");
 
         switch (option) {
-            case DELETE -> BookService.getInstance().remove(book);
+            case DELETE -> bookService.remove(book);
         }
     }
 }

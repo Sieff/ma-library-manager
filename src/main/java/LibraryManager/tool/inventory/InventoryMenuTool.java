@@ -5,8 +5,7 @@ import LibraryManager.tool.Tool;
 public class InventoryMenuTool extends Tool {
     @Override
     public void start() {
-        InventoryMenuOption option = textIO.newEnumInputReader(InventoryMenuOption.class)
-                .read("What do you want to do?");
+        InventoryMenuOption option = enumInput(InventoryMenuOption.class, "What do you want to do?");
 
         switch (option) {
             case ADD_BOOK -> {

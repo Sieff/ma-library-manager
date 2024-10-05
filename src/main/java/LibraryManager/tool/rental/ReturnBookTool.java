@@ -9,27 +9,30 @@ public class ReturnBookTool extends Tool {
     @Override
     public void start() {
         if (rentalService.getAll().isEmpty()) {
-            println("No books are currently rented.");
+            println("No books are currently rented.\n");
             return;
         }
 
         print(rentalService.allRentalsString());
 
-        String inputId = textIO.newStringInputReader().withMinLength(0)
-                .read("Enter Rental-ID to return a book (Enter to exit)");
+        String inputId = stringInput("Enter Rental-ID to return a book (Enter to exit)", true);
 
-        if (!inputId.isEmpty()) {
-            try {
-                Integer id = Integer.parseInt(inputId);
-                BookRental removed = RentalService.getInstance().returnBook(id);
-                if (removed != null) {
-                    printf("Successfully returned book %d\n", removed.getBook().getId());
-                } else {
-                    printf("There was no rental with ID %d\n", id);
-                }
-            } catch (NumberFormatException ignored) {
+        if (inputId.isEmpty()) {
+            return;
+        }
 
+        try {
+            Integer id = Integer.parseInt(inputId);
+            BookRental removed = rentalService.returnBook(id);
+            if (removed != null) {
+                println("Successfully returned book\n");
+            } else {
+                printf("There was no rental with ID %d\n", id);
+                start();
             }
+        } catch (NumberFormatException e) {
+            print("Not a valid ID, please enter a number\n");
+            start();
         }
     }
 }

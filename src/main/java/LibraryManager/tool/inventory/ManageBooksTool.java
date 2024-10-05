@@ -11,14 +11,13 @@ public class ManageBooksTool extends Tool {
 
         print(bookService.allBooksAsString());
 
-        String bookId = textIO.newStringInputReader().withMinLength(0)
-                .read("Which Book do you want to manage? (Enter to exit)");
+        String bookId = stringInput("Which Book do you want to manage? (Enter to exit)", true);
 
         try {
             int id = Integer.parseInt(bookId);
 
-            if (BookService.getInstance().get(id) != null) {
-                new ManageBookTool(BookService.getInstance().get(id)).start();
+            if (bookService.get(id) != null) {
+                new ManageBookTool(bookService.get(id)).start();
             } else {
                 printf("The Book with ID %d does not exist\n", id);
                 start();
