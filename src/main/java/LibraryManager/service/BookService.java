@@ -1,7 +1,7 @@
 package LibraryManager.service;
 
 import LibraryManager.model.Book;
-import LibraryManager.util.RowTablePrinter;
+import LibraryManager.util.RowTableStringBuilder;
 import LibraryManager.util.TableStringBuilder;
 
 import java.util.HashMap;
@@ -60,19 +60,19 @@ public class BookService {
     }
 
     public String allBooksAsString() {
-        TableStringBuilder tablePrinter = new RowTablePrinter();
-        tablePrinter.setHeaders(getBookHeaders());
+        TableStringBuilder tableStringBuilder = new RowTableStringBuilder();
+        tableStringBuilder.setHeaders(getBookHeaders());
         for (Book book : getAll()) {
-            tablePrinter.addDataPoint(getBookData(book));
+            tableStringBuilder.addDataPoint(getBookData(book));
         }
-        return tablePrinter.toString();
+        return tableStringBuilder.toString();
     }
 
     public String bookAsString(Book book) {
-        TableStringBuilder tablePrinter = new RowTablePrinter();
-        tablePrinter.setHeaders(getBookHeaders());
-        tablePrinter.addDataPoint(getBookData(book));
+        TableStringBuilder tableStringBuilder = new RowTableStringBuilder();
+        tableStringBuilder.setHeaders(getBookHeaders());
+        tableStringBuilder.addDataPoint(getBookData(book));
 
-        return tablePrinter.toString();
+        return tableStringBuilder.toString();
     }
 }

@@ -13,7 +13,7 @@ public class ReturnBookTool extends Tool {
             return;
         }
 
-        print(rentalService.allRentalsString());
+        print(rentalService.allRentalsAsString());
 
         String inputId = stringInput("Enter Rental-ID to return a book (Enter to exit)", true);
 

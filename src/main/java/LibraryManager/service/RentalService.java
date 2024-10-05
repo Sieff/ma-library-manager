@@ -2,7 +2,7 @@ package LibraryManager.service;
 
 import LibraryManager.model.Book;
 import LibraryManager.model.BookRental;
-import LibraryManager.util.RowTablePrinter;
+import LibraryManager.util.RowTableStringBuilder;
 import LibraryManager.util.TableStringBuilder;
 import LibraryManager.model.BookRentalRequest;
 
@@ -65,15 +65,15 @@ public class RentalService {
         );
     }
 
-    public String allRentalsString() {
+    public String allRentalsAsString() {
         List<BookRental> allRentals = bookRentals.values().stream().toList();
 
-        TableStringBuilder tablePrinter = new RowTablePrinter();
-        tablePrinter.setHeaders(getRentalHeaders());
+        TableStringBuilder tableStringBuilder = new RowTableStringBuilder();
+        tableStringBuilder.setHeaders(getRentalHeaders());
         for (BookRental bookRental : allRentals) {
-            tablePrinter.addDataPoint(getRentalData(bookRental));
+            tableStringBuilder.addDataPoint(getRentalData(bookRental));
         }
 
-        return tablePrinter.toString();
+        return tableStringBuilder.toString();
     }
 }

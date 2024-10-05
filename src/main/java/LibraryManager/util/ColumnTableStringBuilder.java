@@ -3,7 +3,7 @@ package LibraryManager.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ColumnTablePrinter extends TableStringBuilder {
+public class ColumnTableStringBuilder extends TableStringBuilder {
     @Override
     protected List<String> getDataLines(List<Integer> columnWidths)  {
         List<StringBuilder> lines = new ArrayList<>();
