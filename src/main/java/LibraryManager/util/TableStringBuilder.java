@@ -7,6 +7,7 @@ import java.util.List;
  * Create Strings of Table data.
  * Data is represented as a list fo lists of strings.
  * Table headers are a list of strings.
+ * Call the render method to render the table.
  */
 public abstract class TableStringBuilder {
     protected final List<List<String>> table = new ArrayList<>();
@@ -29,7 +30,7 @@ public abstract class TableStringBuilder {
     /**
      * Check if the table can be rendered
      */
-    protected abstract void validateTable();
+    protected abstract void validateTable() throws RuntimeException;
 
     /**
      * Add a data point to the table
@@ -57,9 +58,17 @@ public abstract class TableStringBuilder {
         this.maxColumnWidth = maxColumnWidth;
     }
 
-    @Override
-    public String toString() {
-        validateTable();
+    /**
+     * Create the rendered string for the table
+     * @return The string representing the table as a string
+     * @throws RuntimeException Exception when validation fails
+     */
+    public String render() throws RuntimeException {
+        try {
+            validateTable();
+        } catch (RuntimeException e) {
+            throw e;
+        }
 
         List<Integer> columnWidths = getColumnWidths();
 

@@ -117,6 +117,6 @@ public class RentalService {
             tableStringBuilder.addDataPoint(getRentalData(bookRental));
         }
 
-        return tableStringBuilder.toString();
+        return tableStringBuilder.render();
     }
 }

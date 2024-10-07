@@ -4,13 +4,16 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
+
 public class ColumnTableStringBuilderTest {
     @Test
     void testEmpty() {
         ColumnTableStringBuilder columnTableStringBuilder = new ColumnTableStringBuilder();
 
         try {
-            columnTableStringBuilder.toString();
+            columnTableStringBuilder.render();
             assert false;
         } catch (Exception ignored) {
             assert true;
@@ -19,10 +22,21 @@ public class ColumnTableStringBuilderTest {
         columnTableStringBuilder.setHeaders(List.of(""));
 
         try {
-            columnTableStringBuilder.toString();
+            columnTableStringBuilder.render();
             assert false;
         } catch (Exception ignored) {
             assert true;
+        }
+
+        ColumnTableStringBuilder columnTableStringBuilder2 = new ColumnTableStringBuilder();
+        columnTableStringBuilder2.setHeaders(List.of());
+        columnTableStringBuilder2.addDataPoint(List.of(""));
+
+        try {
+            columnTableStringBuilder2.render();
+            fail("Expected RuntimeException to be thrown");
+        } catch (Exception e) {
+            assertNotNull(e);
         }
     }
 
@@ -34,10 +48,9 @@ public class ColumnTableStringBuilderTest {
         columnTableStringBuilder.addDataPoint(List.of(""));
 
         try {
-            columnTableStringBuilder.toString();
-            assert true;
-        } catch (Exception ignored) {
-            assert false;
+            columnTableStringBuilder.render();
+        } catch (Exception e) {
+            fail("Expected no exception to be thrown");
         }
     }
 
@@ -48,10 +61,10 @@ public class ColumnTableStringBuilderTest {
         columnTableStringBuilder.addDataPoint(List.of(""));
 
         try {
-            columnTableStringBuilder.toString();
-            assert false;
-        } catch (Exception ignored) {
-            assert true;
+            columnTableStringBuilder.render();
+            fail("Expected RuntimeException to be thrown");
+        } catch (RuntimeException e) {
+            assertNotNull(e);
         }
     }
 
@@ -63,10 +76,10 @@ public class ColumnTableStringBuilderTest {
         columnTableStringBuilder.addDataPoint(List.of("", ""));
 
         try {
-            columnTableStringBuilder.toString();
-            assert false;
-        } catch (Exception ignored) {
-            assert true;
+            columnTableStringBuilder.render();
+            fail("Expected RuntimeException to be thrown");
+        } catch (RuntimeException e) {
+            assertNotNull(e);
         }
     }
 }

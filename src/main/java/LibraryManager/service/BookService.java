@@ -107,7 +107,7 @@ public class BookService {
         for (Book book : getAll()) {
             tableStringBuilder.addDataPoint(getBookData(book));
         }
-        return tableStringBuilder.toString();
+        return tableStringBuilder.render();
     }
 
     /**
@@ -120,6 +120,6 @@ public class BookService {
         tableStringBuilder.setHeaders(getBookHeaders());
         tableStringBuilder.addDataPoint(getBookData(book));
 
-        return tableStringBuilder.toString();
+        return tableStringBuilder.render();
     }
 }
