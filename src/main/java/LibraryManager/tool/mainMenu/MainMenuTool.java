@@ -5,6 +5,9 @@ import LibraryManager.tool.inventory.InventoryMenuTool;
 import LibraryManager.tool.rental.BookRentalTool;
 import LibraryManager.tool.rental.ReturnBookTool;
 
+/**
+ * A user interface to display the main menu of the tool.
+ */
 public class MainMenuTool extends Tool {
     @Override
     public void start() {

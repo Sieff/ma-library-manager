@@ -3,6 +3,11 @@ package LibraryManager.util;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A TableStringBuilder to create tables that are represented as a list of rows.
+ * Adding a data point here means adding a row in the rendered table.
+ * Each row should have the same amount of entries, which represent the columns.
+ */
 public class RowTableStringBuilder extends TableStringBuilder {
     @Override
     protected List<String> getDataLines(List<Integer> columnWidths)  {
@@ -55,11 +60,7 @@ public class RowTableStringBuilder extends TableStringBuilder {
             }
         }
 
-        if (headers.isEmpty()) {
-            return getRenderedColumnWidths(columnWidths);
-        } else {
-            List<Integer> headerWidths = headers.stream().map(String::length).toList();
-            return getRenderedColumnWidths(headerWidths, columnWidths);
-        }
+        List<Integer> headerWidths = headers.stream().map(String::length).toList();
+        return getRenderedColumnWidths(headerWidths, columnWidths);
     }
 }

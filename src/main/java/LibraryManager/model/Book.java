@@ -1,5 +1,8 @@
 package LibraryManager.model;
 
+/**
+ * Represents a book
+ */
 public class Book {
     private final Integer id;
     private final String title;

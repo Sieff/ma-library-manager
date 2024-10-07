@@ -3,12 +3,14 @@ package LibraryManager.tool.inventory;
 import LibraryManager.service.BookService;
 import LibraryManager.tool.Tool;
 
+/**
+ * A user interface to display all books and select one to manage.
+ */
 public class ManageBooksTool extends Tool {
     private final BookService bookService = BookService.getInstance();
+
     @Override
     public void start() {
-        textIO.getTextTerminal();
-
         print(bookService.allBooksAsString());
 
         String bookId = stringInput("Which Book do you want to manage? (Enter to exit)", true);

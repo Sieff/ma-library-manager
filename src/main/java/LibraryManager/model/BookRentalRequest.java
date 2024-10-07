@@ -1,5 +1,8 @@
 package LibraryManager.model;
 
+/**
+ * Represents a request to rent a book
+ */
 public class BookRentalRequest {
     private final Book book;
     private final String borrower;

@@ -6,12 +6,15 @@ import LibraryManager.service.BookService;
 import LibraryManager.service.RentalService;
 import LibraryManager.tool.Tool;
 
+/**
+ * A user interface to rent a book from the library.
+ */
 public class BookRentalTool extends Tool {
     private final BookService bookService = BookService.getInstance();
     private final RentalService rentalService = RentalService.getInstance();
+
     @Override
     public void start() {
-
         Book book = bookInput();
         if (book == null) {
             return;
@@ -22,9 +25,7 @@ public class BookRentalTool extends Tool {
         }
 
         print(bookService.bookAsString(book));
-
         String borrower = stringInput("Who wants to rent the book?", false);
-
         BookRentalRequest request = new BookRentalRequest(book, borrower);
 
         boolean success = rentalService.rentBook(request);
@@ -36,6 +37,10 @@ public class BookRentalTool extends Tool {
 
     }
 
+    /**
+     * Displays all books and prompts the user to input an ID for a book to rent
+     * @return The selected book
+     */
     private Book bookInput() {
         print(bookService.allBooksAsString());
 

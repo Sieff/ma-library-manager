@@ -4,8 +4,13 @@ import LibraryManager.model.BookRental;
 import LibraryManager.service.RentalService;
 import LibraryManager.tool.Tool;
 
+/**
+ * A user interface to return a book to the library.
+ *
+ */
 public class ReturnBookTool extends Tool {
     private final RentalService rentalService = RentalService.getInstance();
+
     @Override
     public void start() {
         if (rentalService.getAll().isEmpty()) {
@@ -31,7 +36,7 @@ public class ReturnBookTool extends Tool {
                 start();
             }
         } catch (NumberFormatException e) {
-            print("Not a valid ID, please enter a number\n");
+            print("Not a valid ID, please enter an integer value\n");
             start();
         }
     }

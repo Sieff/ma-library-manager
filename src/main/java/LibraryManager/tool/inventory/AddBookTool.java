@@ -4,6 +4,9 @@ import LibraryManager.model.Book;
 import LibraryManager.service.BookService;
 import LibraryManager.tool.Tool;
 
+/**
+ * A user interface to add a new book to the library.
+ */
 public class AddBookTool extends Tool {
     private final BookService bookService = BookService.getInstance();
 

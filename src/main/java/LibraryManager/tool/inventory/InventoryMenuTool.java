@@ -2,6 +2,9 @@ package LibraryManager.tool.inventory;
 
 import LibraryManager.tool.Tool;
 
+/**
+ * A user interface to display the inventory menu.
+ */
 public class InventoryMenuTool extends Tool {
     @Override
     public void start() {

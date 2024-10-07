@@ -1,5 +1,8 @@
 package LibraryManager.model;
 
+/**
+ * Represents a book rental
+ */
 public class BookRental {
     private final Integer id;
     private final Book book;

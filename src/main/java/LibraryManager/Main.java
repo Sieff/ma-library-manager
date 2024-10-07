@@ -9,12 +9,17 @@ public class Main {
 
     public static void main(String[] args) {
         populateInventory();
+
+        // Main menu loops indefinitely
         while (true) {
             MainMenuTool menu = new MainMenuTool();
             menu.start();
         }
     }
 
+    /**
+     * Creates an initial state in the library when starting the app
+     */
     private static void populateInventory() {
         bookService.add(new Book(bookService.getNextId(), "Harry Potter and the Philosopher's Stone", "J. K. Rowling", "Fantasy", 1997));
         bookService.add(new Book(bookService.getNextId(), "Die Welt ist nicht immer Freitag", "Horst Evers", "Humor", 2001));
@@ -26,6 +31,8 @@ public class Main {
         bookService.add(new Book(bookService.getNextId(), "The Great Gatsby", "F. Scott Fitzgerald", "Fiction", 1925));
         bookService.add(new Book(bookService.getNextId(), "Moby-Dick", "Herman Melville", "Adventure", 1851));
         bookService.add(new Book(bookService.getNextId(), "Brave New World", "Aldous Huxley", "Science Fiction", 1932));
+
+        // TODO: Add more books if needed
         /*
         bookService.add(new Book(bookService.getNextId(), "The Catcher in the Rye", "J. D. Salinger", "Fiction", 1951));
         bookService.add(new Book(bookService.getNextId(), "The Lord of the Rings", "J. R. R. Tolkien", "Fantasy", 1954));
@@ -38,8 +45,6 @@ public class Main {
         bookService.add(new Book(bookService.getNextId(), "Dracula", "Bram Stoker", "Horror", 1897));
         bookService.add(new Book(bookService.getNextId(), "Frankenstein", "Mary Shelley", "Horror", 1818));
         bookService.add(new Book(bookService.getNextId(), "Les Misérables", "Victor Hugo", "Historical Fiction", 1862));
-
          */
-
     }
 }
