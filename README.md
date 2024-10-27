@@ -12,6 +12,7 @@ The entry point for each tool is the "start" method.
 A tool should either resolve and return to the tool that called it or create and start another tool.
 
 The main menu tool is called as the entry point for the app. When subsequent tools resolve, the main menu tool will always be restarted.
+
 ### Models
 
 Models are mainly data classes that represent entities.
@@ -19,9 +20,9 @@ Models are mainly data classes that represent entities.
 ### Services
 
 Services are  classes that implement business logic.
-They work with model classes.
+They usually work with model classes.
 
-The BookService and RentalService are both singletons, as they manage the state of the library.
+The BookService and RentalService are both singletons, they manage the state of the library.
 
 ### Util
 
@@ -38,20 +39,29 @@ To set table headers, call the setTableHeaders method.
 
 Note that before printing the table, the amount of headers should equal the amount of columns and the amount of rows/columns should be consistent between entries.
 
+### Tests
+
+There are a few tests to test the business logic and utils.
+
 ## Your task
 
-The library wants you to incorporate the location information of books into the library manager.
+Imagine you are a freelancer and have accepted a gig for a library.
+They want you to incorporate the location information of books within the library into their library manager.
 
-Create a system for the library to represent and track the shelf location of books within the library.
+Create a system for the library to represent and manage the physical location of books within the library.
 
 The library gave the following requirements:
-- Each bookshelf consists of multiple tiers of shelves
+- The library is split into different regions (e.g. horror, novels, kid's books, ...)
 - Each bookshelf lies within a unique region of the library
+- Each bookshelf consists of multiple tiers of shelves
 - Multiple bookshelves are typically grouped into a bigger bookshelf
 - We want to be able to tell exactly where a book is
-- We want to be able to tell what books are close to a book, for example which books are next to it, on the same shelf or within a certain proximity
+- We want to be able to tell which books are next to a book
+- We want to be able to tell which books are on the same tier of the bookshelf as the book
 
 You are free to change the entire code base to your liking.
+There is already a basic implementation of the user interface, which you can use if you want.
+You don't have to populate the library with a completed dataset.
 You are not allowed to use any external information sources, please use your assistant to gather information.
 
 ### Example Floor plan

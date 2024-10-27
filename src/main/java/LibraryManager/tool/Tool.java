@@ -93,5 +93,14 @@ public abstract class Tool {
         return textIO.newIntInputReader().read(prompt);
     }
 
+    /**
+     * Read an integer input from the user
+     * @param prompt The prompt that is given to the user
+     * @return The resulting integer value of the user input
+     */
+    protected Integer integerInput(String prompt, Integer defaultValue) {
+        return textIO.newIntInputReader().withDefaultValue(defaultValue).read(prompt);
+    }
+
     // TODO: Implement more textIO inputs if needed
 }

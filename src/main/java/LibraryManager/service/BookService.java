@@ -111,6 +111,20 @@ public class BookService {
     }
 
     /**
+     * Render a list of books as a table
+     * @param books A list of books
+     * @return A string representing the list of books
+     */
+    public String booksAsString(List<Book> books) {
+        TableStringBuilder tableStringBuilder = new RowTableStringBuilder();
+        tableStringBuilder.setHeaders(getBookHeaders());
+        for (Book book : books) {
+            tableStringBuilder.addDataPoint(getBookData(book));
+        }
+        return tableStringBuilder.render();
+    }
+
+    /**
      * Render a single book as a table with one row
      * @param book The book to be rendered
      * @return A string that represents the given book

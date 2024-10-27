@@ -13,6 +13,7 @@ class BookServiceTest {
 
     @BeforeEach
     public void setUp() {
+        // Remove all books from the bookService
         List<Book> allBooks = bookService.getAll();
         for (Book book : allBooks) {
             bookService.remove(book);

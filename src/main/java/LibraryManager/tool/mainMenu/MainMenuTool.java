@@ -2,6 +2,7 @@ package LibraryManager.tool.mainMenu;
 
 import LibraryManager.tool.Tool;
 import LibraryManager.tool.inventory.InventoryMenuTool;
+import LibraryManager.tool.location.LocationMenu;
 import LibraryManager.tool.rental.BookRentalTool;
 import LibraryManager.tool.rental.ReturnBookTool;
 
@@ -17,6 +18,7 @@ public class MainMenuTool extends Tool {
             case INVENTORY -> new InventoryMenuTool().start();
             case RENT -> new BookRentalTool().start();
             case RETURN -> new ReturnBookTool().start();
+            case LOCATION -> new LocationMenu().start();
         }
     }
 }
