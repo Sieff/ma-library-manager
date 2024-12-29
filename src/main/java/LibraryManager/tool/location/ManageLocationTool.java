@@ -27,10 +27,9 @@ public class ManageLocationTool extends Tool {
     }
 
     private void createLocation(Book book) {
-        String region = stringInput("Which region is the bookshelf in?", false);
-        String bookshelf = stringInput("Which bookshelf is the book on?", false);
-        String tier = stringInput("Which tier of the bookshelf is the book on?", false);
-        Integer position = integerInput("Which position within the tier is the book in? (Enter nothing for last position)", -1);
+        String bookcase = stringInput("Which bookcase is the book in?", false);
+        String shelf = stringInput("Which shelf of the bookcase is the book on?", false);
+        Integer position = integerInput("Which position within the shelf is the book in? (Default: Last position)", -1);
 
         // TODO: TASK: Save location information for book
     }

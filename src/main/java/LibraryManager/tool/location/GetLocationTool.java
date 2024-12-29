@@ -23,7 +23,7 @@ public class GetLocationTool extends Tool {
 
                 // TODO: TASK: Retrieve location information for book
                 println("The book is located here:");
-                println("TODO\n");
+                println("Example: The book is in bookcase \"A\", on shelf \"b\", in position 3.\n");
 
                 // TODO: TASK: Retrieve neighboring books for book
                 List<Book> neighboringBooks = new ArrayList<>();
@@ -35,14 +35,14 @@ public class GetLocationTool extends Tool {
                     println("There are no books next to the book.\n");
                 }
 
-                // TODO: TASK: Retrieve books on the same tier of bookshelf for book
-                List<Book> booksOnSameTier = new ArrayList<>();
+                // TODO: TASK: Retrieve books on the same shelf of the bookcase for book
+                List<Book> booksOnSameShelf = new ArrayList<>();
 
-                if (!booksOnSameTier.isEmpty()) {
-                    println("The following books are on the same tier:");
-                    println(bookService.booksAsString(booksOnSameTier));
+                if (!booksOnSameShelf.isEmpty()) {
+                    println("The following books are on the same shelf:");
+                    println(bookService.booksAsString(booksOnSameShelf));
                 } else {
-                    println("There are no books on the same tier.\n");
+                    println("There are no books on the same shelf.\n");
                 }
 
             } else {
