@@ -1,14 +1,14 @@
-package LibraryManager.tool.rental;
+package LibraryManager.ui.rental;
 
 import LibraryManager.model.BookRental;
 import LibraryManager.service.RentalService;
-import LibraryManager.tool.Tool;
+import LibraryManager.ui.AbstractUi;
 
 /**
  * A user interface to return a book to the library.
  *
  */
-public class ReturnBookTool extends Tool {
+public class ReturnBookUi extends AbstractUi {
     private final RentalService rentalService = RentalService.getInstance();
 
     @Override

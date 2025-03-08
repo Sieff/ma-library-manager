@@ -1,10 +1,10 @@
-package LibraryManager.tool.location;
+package LibraryManager.ui.location;
 
 import LibraryManager.model.*;
 import LibraryManager.service.BookService;
-import LibraryManager.tool.Tool;
+import LibraryManager.ui.AbstractUi;
 
-public class ManageLocationTool extends Tool {
+public class ManageLocationUi extends AbstractUi {
     private final BookService bookService = BookService.getInstance();
     @Override
     public void start() {

@@ -1,22 +1,22 @@
-package LibraryManager.tool.inventory;
+package LibraryManager.ui.inventory;
 
-import LibraryManager.tool.Tool;
+import LibraryManager.ui.AbstractUi;
 
 /**
  * A user interface to display the inventory menu.
  */
-public class InventoryMenuTool extends Tool {
+public class InventoryMenuUi extends AbstractUi {
     @Override
     public void start() {
         InventoryMenuOption option = enumInput(InventoryMenuOption.class, "What do you want to do?");
 
         switch (option) {
             case ADD_BOOK -> {
-                new AddBookTool().start();
+                new AddBookUi().start();
                 start();
             }
             case MANAGE_BOOKS -> {
-                new ManageBooksTool().start();
+                new ManageBooksUi().start();
                 start();
             }
         }

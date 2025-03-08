@@ -1,4 +1,4 @@
-package LibraryManager.tool.location;
+package LibraryManager.ui.location;
 
 public enum LocationMenuOption {
     MANAGE_LOCATION,

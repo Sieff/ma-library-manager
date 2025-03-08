@@ -2,7 +2,7 @@ package LibraryManager;
 
 import LibraryManager.model.Book;
 import LibraryManager.service.BookService;
-import LibraryManager.tool.mainMenu.MainMenuTool;
+import LibraryManager.ui.mainMenu.MainMenuUi;
 
 public class Main {
     private final static BookService bookService = BookService.getInstance();
@@ -12,7 +12,7 @@ public class Main {
 
         // Main menu loops indefinitely
         while (true) {
-            MainMenuTool menu = new MainMenuTool();
+            MainMenuUi menu = new MainMenuUi();
             menu.start();
         }
     }

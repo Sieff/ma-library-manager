@@ -1,13 +1,13 @@
-package LibraryManager.tool.inventory;
+package LibraryManager.ui.inventory;
 
 import LibraryManager.model.Book;
 import LibraryManager.service.BookService;
-import LibraryManager.tool.Tool;
+import LibraryManager.ui.AbstractUi;
 
 /**
  * A user interface to add a new book to the library.
  */
-public class AddBookTool extends Tool {
+public class AddBookUi extends AbstractUi {
     private final BookService bookService = BookService.getInstance();
 
     @Override

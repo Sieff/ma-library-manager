@@ -1,4 +1,4 @@
-package LibraryManager.tool.inventory;
+package LibraryManager.ui.inventory;
 
 /**
  * Options to display in the inventory menu tool.

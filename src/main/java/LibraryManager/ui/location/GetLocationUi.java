@@ -1,13 +1,13 @@
-package LibraryManager.tool.location;
+package LibraryManager.ui.location;
 
 import LibraryManager.model.Book;
 import LibraryManager.service.BookService;
-import LibraryManager.tool.Tool;
+import LibraryManager.ui.AbstractUi;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetLocationTool extends Tool {
+public class GetLocationUi extends AbstractUi {
     private final BookService bookService = BookService.getInstance();
     @Override
     public void start() {

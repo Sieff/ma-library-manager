@@ -1,4 +1,4 @@
-package LibraryManager.tool.mainMenu;
+package LibraryManager.ui.mainMenu;
 
 /**
  * Options to display in the main menu tool.

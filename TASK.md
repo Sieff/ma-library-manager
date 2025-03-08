@@ -13,7 +13,7 @@ The library gave the following requirements:
 - The system should be able to list all the books located on the same shelf as a given book.
 
 You are free to change the entire code base to your liking.
-There is already a basic implementation of the user interface, which you can use and adapt (see [GetLocationTool.java](./src/main/java/LibraryManager/tool/location/GetLocationTool.java) and [ManageLocationTool.java](./src/main/java/LibraryManager/tool/location/ManageLocationTool.java)).
+There is already a basic implementation of the user interface, which you can use and adapt (see [GetLocationUi.java](./src/main/java/LibraryManager/ui/location/GetLocationUi.java) and [ManageLocationUi.java](./src/main/java/LibraryManager/ui/location/ManageLocationUi.java)).
 You don't have to populate the library with a completed dataset.
 You are not allowed to use any external information sources, please use your assistant to gather external information.
 

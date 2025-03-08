@@ -1,4 +1,4 @@
-package LibraryManager.tool;
+package LibraryManager.ui;
 
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
@@ -14,7 +14,7 @@ import org.beryx.textio.TextTerminal;
  * To exit a tool, return in the start method.
  * To restart a tool, call the start method again.
  */
-public abstract class Tool {
+public abstract class AbstractUi {
     private final TextIO textIO = TextIoFactory.getTextIO();
 
     /**

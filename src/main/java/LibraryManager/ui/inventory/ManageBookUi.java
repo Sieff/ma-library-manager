@@ -1,15 +1,15 @@
-package LibraryManager.tool.inventory;
+package LibraryManager.ui.inventory;
 
 
 import LibraryManager.model.Book;
 import LibraryManager.service.BookService;
-import LibraryManager.tool.Tool;
+import LibraryManager.ui.AbstractUi;
 
 /**
  * A user interface to display a book and options to manage it.
  * Accepts a book to manage on creation.
  */
-public class ManageBookTool extends Tool {
+public class ManageBookUi extends AbstractUi {
     private final Book book;
     private final BookService bookService = BookService.getInstance();
 
@@ -17,7 +17,7 @@ public class ManageBookTool extends Tool {
      * To manage a book, pass the book when creating the tool
      * @param book The book to be managed
      */
-    public ManageBookTool(Book book) {
+    public ManageBookUi(Book book) {
         this.book = book;
     }
 

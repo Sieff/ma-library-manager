@@ -1,12 +1,12 @@
-package LibraryManager.tool.inventory;
+package LibraryManager.ui.inventory;
 
 import LibraryManager.service.BookService;
-import LibraryManager.tool.Tool;
+import LibraryManager.ui.AbstractUi;
 
 /**
  * A user interface to display all books and select one to manage.
  */
-public class ManageBooksTool extends Tool {
+public class ManageBooksUi extends AbstractUi {
     private final BookService bookService = BookService.getInstance();
 
     @Override
@@ -19,7 +19,7 @@ public class ManageBooksTool extends Tool {
             int id = Integer.parseInt(bookId);
 
             if (bookService.get(id) != null) {
-                new ManageBookTool(bookService.get(id)).start();
+                new ManageBookUi(bookService.get(id)).start();
             } else {
                 printf("The Book with ID %d does not exist\n", id);
                 start();
